@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from db import models
+from db import database
 from db.database import engine
 from routers import user
 
@@ -13,4 +13,4 @@ def root():
     return {"text":"Hello World"}
 
 
-models.Base.metadata.create_all(engine)
+database.Base.metadata.create_all(engine)
