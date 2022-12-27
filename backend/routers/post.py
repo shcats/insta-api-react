@@ -3,7 +3,8 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 from db.database import get_db
 from routers.schemas import PostDisplay, PostBase
-from db.post_db import create
+from db import post_db
+from typing import List
 
 router = APIRouter(prefix="/post", tags=["POST"])
 
@@ -16,4 +17,9 @@ def create_post(request: PostBase, db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Parameter image_url_type can only types .."
         )
-    return create(db=db, request=request)
+    return post_db.create(db=db, request=request)
+
+
+@router.get("/all", response_model=List[PostDisplay])
+def select_all_posts(db: Session = Depends(get_db)):
+    return post_db.get_all(db=db)
