@@ -1,3 +1,4 @@
+from auth.oauth2 import get_current_user
 from fastapi import APIRouter, Depends, status, UploadFile, File
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
@@ -9,7 +10,6 @@ import random
 import string
 import shutil
 from routers.schemas import UserAuth
-from auth.oauth2 import get_current_user
 
 router = APIRouter(prefix="/post", tags=["POST"])
 
