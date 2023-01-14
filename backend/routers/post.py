@@ -10,6 +10,7 @@ import string
 import shutil
 from routers.schemas import UserAuth
 from auth.oauth2 import get_current_user
+from db.models import DbPost
 
 router = APIRouter(prefix="/post", tags=["POST"])
 
@@ -38,5 +39,10 @@ def upload_image(image: UploadFile = File(...), current_user: UserAuth = Depends
 
     with open(path, "w+b") as buffer:
         shutil.copyfileobj(image.file, buffer)
-    
+
     return {"filename": filename}
+
+
+@router.get("/delete/{id}")
+def delete_post(id: int, db: Session = Depends(get_db), current_user: UserAuth = Depends(get_current_user)):
+    return post_db.delete_post_by_id(db=db, id=id, user_id=current_user.id)
