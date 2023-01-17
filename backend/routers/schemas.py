@@ -23,6 +23,11 @@ class PostBase(BaseModel):
     creator_id: int
 
 
+class CommentBase(BaseModel):
+    text:str
+    username:str
+    post_id:int
+
 class User(BaseModel):
     username: str
 
@@ -38,6 +43,14 @@ class PostDisplay(BaseModel):
     timestamp: datetime
     user: User
 
+    class Config:
+        orm_mode = True
+
+class CommentDisplay(BaseModel):
+    text: str
+    username:str
+    timestamp: datetime
+    
     class Config:
         orm_mode = True
 
