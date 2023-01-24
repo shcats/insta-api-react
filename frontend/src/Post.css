@@ -21,9 +21,21 @@
     font-weight: normal;
     padding: 20px;
     border-bottom: 1px solid lightgray;
-    font-size: 16px;
 }
 
 .post_comments{
     padding: 20px;
+}
+.post_header{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.post_headerInfo{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
 }
