@@ -1,11 +1,14 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
+import { Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:8000";
 
 function App() {
   const [posts, setPost] = useState([]);
+  const [openSignIn, setOpenSignIn] = useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   useEffect(() => {
     fetch(BASE_URL + "/post/all")
@@ -35,10 +38,22 @@ function App() {
       });
   }, []);
   return (
-    <div className="app_posts">
-      {posts.map((post) => (
-        <Post post={post} />
-      ))}
+    <div className="app">
+      <div className="app_header">
+        <img className="app_headerImage" 
+          src="https://png.monster/wp-content/uploads/2020/11/Instagram-zeichen_2-2c204007.png" 
+          alt=""/>
+        <div> 
+        <Button onClick={()=> setOpenSignIn(true)}> Login </Button> 
+        <Button onClick={()=> setOpenSignUp(true)}> SignOut </Button>
+      </div>
+      </div>
+
+      <div className="app_posts">
+        {posts.map((post) => (
+          <Post post={post} />
+        ))}
+      </div>
     </div>
   );
 }
