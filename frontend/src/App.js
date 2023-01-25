@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import { Button } from "@mui/material";
+import Regform from "./RegForm";
 
 const BASE_URL = "http://127.0.0.1:8000";
 
@@ -48,7 +49,7 @@ function App() {
         <Button onClick={()=> setOpenSignUp(true)}> SignOut </Button>
       </div>
       </div>
-
+      <Regform form={openSignIn}/>
       <div className="app_posts">
         {posts.map((post) => (
           <Post post={post} />
