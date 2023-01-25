@@ -8,8 +8,6 @@ const BASE_URL = "http://127.0.0.1:8000";
 
 function App() {
   const [posts, setPost] = useState([]);
-  const [openSignIn, setOpenSignIn] = useState(false);
-  const [openSignUp, setOpenSignUp] = useState(false);
 
   useEffect(() => {
     fetch(BASE_URL + "/post/all")
@@ -45,11 +43,10 @@ function App() {
           src="https://png.monster/wp-content/uploads/2020/11/Instagram-zeichen_2-2c204007.png" 
           alt=""/>
         <div> 
-        <Button onClick={()=> setOpenSignIn(true)}> Login </Button> 
-        <Button onClick={()=> setOpenSignUp(true)}> SignOut </Button>
+        <Regform/>
       </div>
       </div>
-      <Regform form={openSignIn}/>
+
       <div className="app_posts">
         {posts.map((post) => (
           <Post post={post} />

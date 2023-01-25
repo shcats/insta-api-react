@@ -3,13 +3,15 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 600,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -17,13 +19,16 @@ const style = {
   };
 
 function Regform({form}){
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
+    console.log(form);
+
     return (
     <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+        <Button onClick={handleOpen}> Login </Button> 
+        <Button> SignOut </Button>
         <Modal
             open={open}
             onClose={handleClose}
@@ -31,11 +36,22 @@ function Regform({form}){
             aria-describedby="modal-modal-description">
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
+                   Login as 
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </Typography>
+                <Stack direction="row" spacing={3}>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Required"
+                    />
+                    <TextField
+                        id="outlined-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                    />
+                    <Button variant="outlined">LOGIN</Button>
+                </Stack>
             </Box>
         </Modal>
     </div>
