@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const style = {
     position: 'absolute',
@@ -39,6 +40,7 @@ function Regform({form}){
                    Login as 
                 </Typography>
                 <Stack direction="row" spacing={3}>
+                    <AccountCircle sx={{ color: 'action.active', mr: -1, my: 1, fontSize:40 }} />
                     <TextField
                         required
                         id="outlined-required"
