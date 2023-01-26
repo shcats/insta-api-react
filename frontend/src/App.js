@@ -2,12 +2,13 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import { Button } from "@mui/material";
-import Regform from "./RegForm";
 
 const BASE_URL = "http://127.0.0.1:8000";
 
 function App() {
   const [posts, setPost] = useState([]);
+  const [buttonIn, setButtonIn] = useState(false)
+  const [buttonUp, setButtonUp] = useState(false)
 
   useEffect(() => {
     fetch(BASE_URL + "/post/all")
@@ -42,11 +43,11 @@ function App() {
         <img className="app_headerImage" 
           src="https://png.monster/wp-content/uploads/2020/11/Instagram-zeichen_2-2c204007.png" 
           alt=""/>
-        <div> 
-        <Regform/>
+        <div>
+        <Button onClick={setButtonIn(true)}> LOGIN</Button>
+        <Button onClick={setButtonUp(true)}> SIGNOUT</Button> 
       </div>
       </div>
-
       <div className="app_posts">
         {posts.map((post) => (
           <Post post={post} />
