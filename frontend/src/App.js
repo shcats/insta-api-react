@@ -1,14 +1,39 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { Button } from "@mui/material";
+import { Button, Modal } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const BASE_URL = "http://127.0.0.1:8000";
 
+function getModalStyle(){
+  const top=50;
+  const left=50;
+  return {
+    top:`${top}%`,
+    left:`${left}%`,
+    transform:`translate(-${top}%, -${left}%)`
+  }
+}
+
+const useStyles = makeStyles((theme)=>({
+  paper: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    width: 400,
+    border: '2px solid #000',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    padding: '8px 16px 24px',
+  },
+}));
+
 function App() {
+  const classes = useStyles()
+
   const [posts, setPost] = useState([]);
-  const [buttonIn, setButtonIn] = useState(false)
-  const [buttonUp, setButtonUp] = useState(false)
+  const [openSignIn, setopenSignIn] = useState(false)
+  const [openSignUp, setopenSignUp] = useState(false)
+  const [modalStyle, setModalStyle] = useState(getModalStyle)
 
   useEffect(() => {
     fetch(BASE_URL + "/post/all")
@@ -39,13 +64,20 @@ function App() {
   }, []);
   return (
     <div className="app">
+
+     <Modal open={openSignIn} onClose={()=>setopenSignIn(false)}>
+
+        <div style={modalStyle} className={classes.paper}></div>
+
+      </Modal>
+    
       <div className="app_header">
         <img className="app_headerImage" 
           src="https://png.monster/wp-content/uploads/2020/11/Instagram-zeichen_2-2c204007.png" 
           alt=""/>
         <div>
-        <Button onClick={setButtonIn(true)}> LOGIN</Button>
-        <Button onClick={setButtonUp(true)}> SIGNOUT</Button> 
+        <Button onClick={()=>setopenSignIn(true)}> LOGIN</Button>
+        <Button onClick={()=>setopenSignUp(true)}> SIGNOUT</Button> 
       </div>
       </div>
       <div className="app_posts">
