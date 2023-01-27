@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { Button, Modal } from "@mui/material";
+import { Button, Modal, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 const BASE_URL = "http://127.0.0.1:8000";
@@ -16,7 +16,7 @@ function getModalStyle(){
   }
 }
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles(()=>({
   paper: {
     backgroundColor: 'white',
     position: 'absolute',
@@ -34,6 +34,11 @@ function App() {
   const [openSignIn, setopenSignIn] = useState(false)
   const [openSignUp, setopenSignUp] = useState(false)
   const [modalStyle, setModalStyle] = useState(getModalStyle)
+
+  const [username, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+
+  const print_u_p = (event)=> console.log(username, password)
 
   useEffect(() => {
     fetch(BASE_URL + "/post/all")
@@ -67,7 +72,31 @@ function App() {
 
      <Modal open={openSignIn} onClose={()=>setopenSignIn(false)}>
 
-        <div style={modalStyle} className={classes.paper}></div>
+        <div style={modalStyle} className={classes.paper}>
+        <TextField 
+          id="standard-basic" 
+          label="Username" 
+          variant="standard" 
+          value={username}
+          onChange = {(e)=> setUserName(e.target.value)}
+          />
+          
+        <TextField 
+          id="standard-password-input" 
+          label="Password" 
+          type="password" 
+          variant="standard" 
+          value={password}
+          onChange={(e)=> setPassword(e.target.value)}
+          />
+
+        <Button 
+          variant="outlined"
+          onClick={print_u_p}
+        > SignIn </Button>
+
+
+        </div>
 
       </Modal>
     
